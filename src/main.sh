@@ -2,6 +2,7 @@
 set -eo pipefail
 
 export BASE_PATH=$(pwd)
+export GITHUB_HOST=${GITHUB_HOST:-github.com}
 export ISSUES_MESSAGE_BODY_FILE=$BASE_PATH/drift_messages
 
 ctrlc_count=0
@@ -67,5 +68,22 @@ create_issue_on_github(){
 
 }
 
-raw_terraform_state_checker
-create_issue_on_github
+get_repositories(){
+    echo $ORGANIZATION
+
+    if [ -z $REPO_LIST ] || [ -z $ORGANIZATION ];
+    then
+        echo "There is nothing to pull cause of <ORGANIZATION> or <REPO_LIST> one of is empty"
+        exit 1
+    else
+        echo "Pulling repos under $ORGANIZATION"
+        for repo in $REPO_LIST
+        do
+            gh repo clone "$GITHUB_HOST/$ORGANIZATION/$repo"
+        done
+    fi
+}
+
+#raw_terraform_state_checker
+#create_issue_on_github
+#get_repositories

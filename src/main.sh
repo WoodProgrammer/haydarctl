@@ -92,6 +92,16 @@ get_repositories(){
     fi
 }
 
-#raw_terraform_state_checker
-#create_issue_on_github
-#get_repositories
+
+main(){
+    get_repositories
+
+    for repo in $REPO_LIST;
+    do
+        pushd $repo
+            raw_terraform_state_checker
+            create_issue_on_github
+        popd
+    done
+
+}

@@ -1,5 +1,4 @@
 #!/bin/bash
-set -eo pipefail
 
 export BASE_PATH=$(pwd)
 export GITHUB_HOST=${GITHUB_HOST:-github.com}
@@ -36,20 +35,29 @@ raw_terraform_state_checker(){
 
         echo "Pulling state for $module";
         mkdir -p states/$module;
-        sleep 100
+
         pushd $module
          terraform refresh
          terraform plan > state_result_$module
-         STATE_RESULT=$(cat state_result_$module |grep "Your infrastructure matches the configuration.")
+         STATE_CONTENT=$(cat state_result_$module)
+         STATE_RESULT=$( echo ${STATE_CONTENT} |grep "Your infrastructure matches the configuration.")
 
          if [ -z "$STATE_RESULT" ]
          then
-            echo $STATE_RESULT
             echo "There is a config drift on module $module"
-            echo "Creating issue on repo ... .. "
-            echo -e "The module $module contains a config drift" > ${ISSUES_MESSAGE_BODY_FILE}
+
+
+cat << EOF >> ${ISSUES_MESSAGE_BODY_FILE} 
+# The module $module contains a config drift
+<pre><code>
+"${STATE_CONTENT}"
+</code></pre>
+There is no config drift on module $module
+
+EOF
+
          else
-            echo "There is no config drift on module $module"
+             echo "There is no config drift on module $module"
          fi
         popd
 

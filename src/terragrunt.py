@@ -3,6 +3,7 @@ import glob
 import json
 import logging
 import subprocess
+from pathlib import Path
 
 class TerragruntUtils(object):
     def __init__(self):
@@ -29,7 +30,7 @@ class Terragrunt(object):
                 os.makedirs("/tmp/states/{}".format(directory), exist_ok=True)
                 subprocess.run("terragrunt state pull --terragrunt-working-dir {} > /tmp/states/{}tg.tfstate".format(directory, directory), shell=True, check=True)
             except Exception as exp:
-                print(exp)
+                logging.warning(exp)
 
     def state_checker(self): ## that is responsible to fetch states from the remote address
         
@@ -38,15 +39,25 @@ class Terragrunt(object):
             try:
 
                 subprocess.run("terragrunt refresh --terragrunt-working-dir {}".format(directory, directory), shell=True, check=True)
-                subprocess.run("terragrunt plan --terragrunt-working-dir {}".format(directory, directory), shell=True, check=True)
+                subprocess.run("terragrunt plan --terragrunt-working-dir {} > /tmp/states/{}plan_output ".format(directory, directory), shell=True, check=True)
 
             except Exception as exp:
-                print(exp)
+                logging.warning(exp)
 
     def aggregator(self): ## aggregate plan output with issue templates
-        pass
+        for module in self.modules:
+            directory = module.replace("terragrunt.hcl", "")
+            plan_output = "/tmp/states/{}plan_output".format(directory)
+            try:
+                contents = Path(plan_output).read_text()
+                print(contents)
+            except Exception as exp:
+                logging.warning(exp)
+
+
 
 
 obj = Terragrunt()
 obj.fetch_list_of_state_files()
-obj.state_checker()
+#obj.state_checker()
+obj.aggregator()

@@ -6,7 +6,10 @@ class TerragruntIssueGenerator(object):
 
         self.template = env.get_template('terragrunt_gh_issue_templates/issue_template.jinja')
 
-    def create_template_file(self, plan_output, module_name):
+    def create_template_file(self, repo, plan_output, module_name):
 
         output_from_parsed_template = self.template.render(plan_output="{}".format(plan_output), module_name=module_name)
         print(output_from_parsed_template)
+
+        with open("issues/{}.md".format(repo), "w") as fh:
+            fh.write(output_from_parsed_template)

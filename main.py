@@ -16,9 +16,10 @@ if __name__ == "__main__":
     print(modules)
 
     for module in modules:
+        repo = "haydarctl"
         try:
             plan_output = plan_resources[module]
-            issue_obj.create_template_file(plan_output=plan_output, module_name=module)
+            issue_obj.create_template_file(repo=repo, plan_output=plan_output, module_name=module)
         except Exception as exp:
             logging.error(exp)
             continue

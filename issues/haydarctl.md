@@ -1,7 +1,6 @@
-['tests/haydar-terragrunt/terragrunt.hcl', 'tests/haydar-terragrunt/development/eu-west-1/s3/terragrunt.hcl']
 ## Config Drift Results
 
-There is a config drift on Terragrunt module tests/haydar-terragrunt/development/eu-west-1/s3/terragrunt.hcl
+:scream: :fire: There is a config drift on Terragrunt module <b>tests/haydar-terragrunt/development/eu-west-1/s3/terragrunt.hcl</b> :scream: :fire:
 
 <hr></hr>
 

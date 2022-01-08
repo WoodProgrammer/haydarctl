@@ -48,9 +48,10 @@ class Terragrunt(object):
         for module in self.modules:
             directory = module.replace("terragrunt.hcl", "")
             plan_output = "/tmp/states/{}plan_output".format(directory)
+            plan_map = {}
             try:
                 contents = Path(plan_output).read_text()
-                print(contents)
+                plan_map[module] = contents
             except Exception as exp:
                 logging.warning(exp)
 

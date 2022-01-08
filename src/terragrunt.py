@@ -19,10 +19,15 @@ class TerragruntUtils(object):
 class Terragrunt(object):
     def __init__(self):
         self.utils = TerragruntUtils()
-        self.modules = []
+        self.modules = self.set_modules()
 
-    def fetch_list_of_state_files(self, terragrunt_root_addr="tests/haydar-terragrunt/"): ## function to fetch state files from remote address
-        self.modules = self.utils.gather_directories(terragrunt_root_addr)
+    
+    def set_modules(self, terragrunt_root_addr="tests/haydar-terragrunt/"):
+        modules = self.utils.gather_directories(terragrunt_root_addr)
+        return modules
+
+
+    def fetch_list_of_state_files(self): ## function to fetch state files from remote address
 
         for module in self.modules:
             directory = module.replace("terragrunt.hcl", "")
@@ -45,20 +50,18 @@ class Terragrunt(object):
                 logging.warning(exp)
 
     def aggregator(self): ## aggregate plan output with issue templates
+        plan_map = {}
+        
+        
+
         for module in self.modules:
             directory = module.replace("terragrunt.hcl", "")
             plan_output = "/tmp/states/{}plan_output".format(directory)
-            plan_map = {}
+            
             try:
                 contents = Path(plan_output).read_text()
                 plan_map[module] = contents
             except Exception as exp:
                 logging.warning(exp)
 
-
-
-
-obj = Terragrunt()
-obj.fetch_list_of_state_files()
-#obj.state_checker()
-obj.aggregator()
+        return plan_map

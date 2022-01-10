@@ -27,6 +27,8 @@ After we cloned your repositories in the list script will start to run `terragru
 
 According to the plan and refresh outputs you will see what a kind of changes applied out of the your terraform code blocks.
 
+### Notification:
+haydarctl creates issues on your repository just for now and you can check the example issues under issues directory.
 
 ## TODO
 - Improve terragrunt capabilities

@@ -14,7 +14,3 @@ class GithubUtils(object):
             Repo.clone_from(repo_url, clone_to)
         except Exception as exp:
             logging.error(exp)
-
-
-#obj = GithubUtils()
-#obj.clone_repo("WoodProgrammer/haydarctl.git", "/tmp/haydarctl/")

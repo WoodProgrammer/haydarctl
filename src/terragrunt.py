@@ -17,9 +17,9 @@ class TerragruntUtils(object):
 
 
 class Terragrunt(object):
-    def __init__(self):
+    def __init__(self, terragrunt_root_addr):
         self.utils = TerragruntUtils()
-        self.modules = self.set_modules()
+        self.modules = self.set_modules(terragrunt_root_addr)
 
     
     def set_modules(self, terragrunt_root_addr="tests/haydar-terragrunt/"):

@@ -25,9 +25,9 @@ parser.add_argument("--output",
 
 args = parser.parse_args()
 
-def main(config_file):
+def main(config_file, template_directory):
 
-    with open("config/haydar.yaml", "r") as stream:
+    with open(config_file, "r") as stream:
         try:
             config_values = yaml.safe_load(stream)
         except yaml.YAMLError as error:
@@ -57,7 +57,7 @@ def main(config_file):
         for module in modules:
             try:
                 plan_output = plan_resources[module]
-                issue_obj.create_template_file(repo=repo, plan_output=plan_output, module_name=module)
+                issue_obj.create_template_file(repo=repo, plan_output=plan_output, module_name=module, template_directory=template_directory)
             except Exception as exp:
                 logging.error(exp)
                 continue
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     if check_directory == True and check_config_file == True:
         logging.warning("The repo check just started on  the repositories are according to the {} file .. ".format(config_file))
-        main(config_file=config_file)
+        main(config_file=config_file, template_directory=directory)
     else:
         logging.error("File status {}".format(check_config_file))
         logging.error("Directory status {}".format(check_directory))

@@ -15,12 +15,13 @@ organization: WoodProgrammer
 repo_list:
   - infra_hede
 ```
+You just set your organization name and list of the repository.
 
 Now you have to create a token that is able to clone your repositories under the repo_list ;
 
 ```sh
     export GH_TOKEN=<YOU-SUPER-SECRET-GITHUB-TOKEN>
-    python3 main.py
+    python3 main.py --config <YOUR_CONFIG_MAP>
 ```
 
 After we cloned your repositories in the list script will start to run `terragrun plan` and `refresh` command at the background and check the configurational change.

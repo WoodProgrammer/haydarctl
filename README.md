@@ -1,4 +1,4 @@
-## haydarctl [Proof of Concept]
+## haydarctl [DEMO]
 
 `haydarctl` checks detect and notifies the IAC state and config drifts based on the infrastructure code definitions on Terragrunt.
 
@@ -21,7 +21,7 @@ Now you have to create a token that is able to clone your repositories under the
 
 ```sh
     export GH_TOKEN=<YOU-SUPER-SECRET-GITHUB-TOKEN>
-    python3 main.py --config <YOUR_CONFIG_MAP>
+    python3 main.py --config <YOUR_CONFIG_FILE>
 ```
 
 After we cloned your repositories in the list script will start to run `terragrun plan` and `refresh` command at the background and check the configurational change.

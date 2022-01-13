@@ -34,6 +34,5 @@ haydarctl creates issues on your repository just for now and you can check the e
 ## TODO
 - Improve terragrunt capabilities
 - Multi branch support
-- Better visibility
 - UI based on demand checks
 - Terraform support

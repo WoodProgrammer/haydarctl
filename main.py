@@ -1,20 +1,27 @@
+import sys
 import yaml
 import logging
 import argparse
+from pathlib import Path
 from src.terragrunt import Terragrunt
 from src.issue_generator import TerragruntIssueGenerator
 from src.gh_utils import GithubUtils
 
-## Terragrunt testing 
 
 parser = argparse.ArgumentParser(description="Path of the configuration file")
 
-# Add the arguments
+
 parser.add_argument("--config",
                        action='store',
                        type=str,
                        help="the path of the configuration file",
                        default="./config/haydar.yaml")
+
+parser.add_argument("--output",
+                       action='store',
+                       type=str,
+                       help="the locationg of the generated template files",
+                       default="./issues")
 
 args = parser.parse_args()
 
@@ -58,5 +65,17 @@ def main(config_file):
 
 if __name__ == "__main__":
     config_file = args.config
-    logging.warning("The repo check just started on  the repositories are according to the {} file .. ".format(config_file))
-    main(config_file=config_file)
+    directory = args.output
+
+    check_config_file = Path(config_file).exists()
+    check_directory = Path(directory).is_dir()
+
+    if check_directory == True and check_config_file == True:
+        logging.warning("The repo check just started on  the repositories are according to the {} file .. ".format(config_file))
+        main(config_file=config_file)
+    else:
+        logging.error("File status {}".format(check_config_file))
+        logging.error("Directory status {}".format(check_directory))
+
+        logging.error("Please check the directory and file names directory:: {} file:: {} ".format(directory, config_file))
+        sys.exit(1)

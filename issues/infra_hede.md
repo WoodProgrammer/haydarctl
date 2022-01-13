@@ -6,6 +6,7 @@
 
 <pre>
 <code>
+Acquiring state lock. This may take a few moments...
 [0m[1maws_s3_bucket.this[0]: Refreshing state... [id=alb-development-access-logs-haydarctl][0m
 [0m[1maws_s3_bucket_policy.this[0]: Refreshing state... [id=alb-development-access-logs-haydarctl][0m
 [0m[1maws_s3_bucket_public_access_block.this[0]: Refreshing state... [id=alb-development-access-logs-haydarctl][0m
@@ -84,7 +85,7 @@ Terraform will perform the following actions:
                       [31m-[0m [0mAction    = "s3:PutObject"
                       [31m-[0m [0mEffect    = "Allow"
                       [31m-[0m [0mPrincipal = {
-                          [31m-[0m [0mAWS = "arn:aws:iam::ACCOUNT_ID_AWS:root"
+                          [31m-[0m [0mAWS = "arn:aws:iam::156460612806:root"
                         }
                       [31m-[0m [0mResource  = "arn:aws:s3:::alb-development-access-logs-haydarctl/*"
                       [31m-[0m [0mSid       = ""

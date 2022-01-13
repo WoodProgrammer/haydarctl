@@ -1,11 +1,45 @@
 import yaml
 import logging
+import argparse
 from src.terragrunt import Terragrunt
 from src.issue_generator import TerragruntIssueGenerator
 from src.gh_utils import GithubUtils
 
-## Terragrunt testing purposes
+## Terragrunt testing 
+
+parser = argparse.ArgumentParser(description="Path of the configuration file")
+
+# Add the arguments
+parser.add_argument("--config",
+                       action='store',
+                       type=str,
+                       help="the path of the configuration file",
+                       default="./config/haydar.yaml")
+
+args = parser.parse_args()
+
+print(args.config)
+
+'''
 if __name__ == "__main__":
+
+
+    arg_result = check_args()
+
+
+    if arg_result[1] == True:
+        main(args)
+    else:
+        logging.error(arg_result)
+        exit 1
+'''
+
+
+def check_args():
+    pass
+
+
+def main(args):
 
     with open("config/haydar.yaml", "r") as stream:
         try:
@@ -15,6 +49,12 @@ if __name__ == "__main__":
 
     organization = config_values["organization"]
     repo_list = config_values["repo_list"]
+
+    gh_obj = GithubUtils()
+
+    for repo in repo_list:
+        gh_obj.clone_repo("{}/{}".format(organization, repo), "/tmp/{}".format(repo))
+
 
     for repo in repo_list:
 
@@ -37,10 +77,3 @@ if __name__ == "__main__":
                 continue
 
 
-'''
-    gh_obj = GithubUtils()
-
-    for repo in repo_list:
-        gh_obj.clone_repo("{}/{}".format(organization, repo), "/tmp/{}".format(repo))
-
-'''

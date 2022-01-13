@@ -18,28 +18,7 @@ parser.add_argument("--config",
 
 args = parser.parse_args()
 
-print(args.config)
-
-'''
-if __name__ == "__main__":
-
-
-    arg_result = check_args()
-
-
-    if arg_result[1] == True:
-        main(args)
-    else:
-        logging.error(arg_result)
-        exit 1
-'''
-
-
-def check_args():
-    pass
-
-
-def main(args):
+def main(config_file):
 
     with open("config/haydar.yaml", "r") as stream:
         try:
@@ -77,3 +56,7 @@ def main(args):
                 continue
 
 
+if __name__ == "__main__":
+    config_file = args.config
+    logging.warning("The repo check just started on  the repositories are according to the {} file .. ".format(config_file))
+    main(config_file=config_file)

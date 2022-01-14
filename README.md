@@ -7,7 +7,7 @@ In IAC universe we can seperate drift problem in two main part.<a href="https://
 
 Let's check this example ; 
 
-<img src="./docs/img/config-drift"></img>
+<img src="./docs/img/config-drift.png"></img>
 
 In this example diagram at day-0 teams create their own resource on AWS.After that some of the manual changes and non-imported resources can make your code blocks too far away from the desired state of the terraform.
 

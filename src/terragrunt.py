@@ -20,6 +20,7 @@ class Terragrunt(object):
     def __init__(self, terragrunt_root_addr):
         self.utils = TerragruntUtils()
         self.modules = self.set_modules(terragrunt_root_addr)
+        self.working_directory = os.environ.get("WORKING_DIRECTORY")
 
     
     def set_modules(self, terragrunt_root_addr="tests/haydar-terragrunt/"):
@@ -32,8 +33,8 @@ class Terragrunt(object):
         for module in self.modules:
             directory = module.replace("terragrunt.hcl", "")
             try:
-                os.makedirs("/tmp/states/{}".format(directory), exist_ok=True)
-                subprocess.run("terragrunt state pull --terragrunt-working-dir {} > /tmp/states/{}tg.tfstate".format(directory, directory), shell=True, check=True)
+                os.makedirs("{}/states/{}".format(self.working_directory, directory), exist_ok=True)
+                subprocess.run("terragrunt state pull --terragrunt-working-dir {} > {}/states/{}tg.tfstate".format(directory, self.working_directory, directory), shell=True, check=True)
             except Exception as exp:
                 logging.warning(exp)
 
@@ -44,7 +45,7 @@ class Terragrunt(object):
             try:
 
                 subprocess.run("terragrunt refresh --terragrunt-working-dir {}".format(directory, directory), shell=True, check=True)
-                subprocess.run("terragrunt plan --terragrunt-working-dir {} > /tmp/states/{}plan_output ".format(directory, directory), shell=True, check=True)
+                subprocess.run("terragrunt plan --terragrunt-working-dir {} > {}/states/{}plan_output ".format(directory, self.working_directory, directory), shell=True, check=True)
 
             except Exception as exp:
                 logging.warning(exp)
@@ -56,7 +57,7 @@ class Terragrunt(object):
 
         for module in self.modules:
             directory = module.replace("terragrunt.hcl", "")
-            plan_output = "/tmp/states/{}plan_output".format(directory)
+            plan_output = "{}/states/{}plan_output".format(self.working_directory, directory)
             
             try:
                 contents = Path(plan_output).read_text()

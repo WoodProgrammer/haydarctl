@@ -1,3 +1,4 @@
+import os
 import sys
 import yaml
 import logging
@@ -26,7 +27,7 @@ parser.add_argument("--output",
 args = parser.parse_args()
 
 def main(config_file, template_directory):
-
+    working_directory = os.environ.get("WORKING_DIRECTORY")
     with open(config_file, "r") as stream:
         try:
             config_values = yaml.safe_load(stream)
@@ -39,12 +40,14 @@ def main(config_file, template_directory):
     gh_obj = GithubUtils()
 
     for repo in repo_list:
-        gh_obj.clone_repo("{}/{}".format(organization, repo), "/tmp/{}".format(repo))
+        gh_obj.clone_repo(
+                repo_addr="{}/{}".format(organization, repo),
+                clone_to="{}/{}".format(working_directory, repo))
 
 
     for repo in repo_list:
 
-        obj = Terragrunt(terragrunt_root_addr="/tmp/{}".format(repo))
+        obj = Terragrunt(terragrunt_root_addr="{}/{}".format(working_directory, repo))
 
         issue_obj = TerragruntIssueGenerator()
         obj.fetch_list_of_state_files()

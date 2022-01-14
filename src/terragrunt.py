@@ -30,21 +30,21 @@ class Terragrunt(object):
     def fetch_list_of_state_files(self): ## function to fetch state files from remote address
 
         for module in self.modules:
-            directory = module.replace("terragrunt.hcl", "")
+            module_directory = module.replace("terragrunt.hcl", "")
             try:
-                os.makedirs("/tmp/states/{}".format(directory), exist_ok=True)
-                subprocess.run("terragrunt state pull --terragrunt-working-dir {} > /tmp/states/{}tg.tfstate".format(directory, directory), shell=True, check=True)
+                os.makedirs("/tmp/states/{}".format(module_directory), exist_ok=True)
+                subprocess.run("terragrunt state pull --terragrunt-working-dir {} > /tmp/states/{}tg.tfstate".format(module_directory, module_directory), shell=True, check=True)
             except Exception as exp:
                 logging.warning(exp)
 
     def state_checker(self): ## that is responsible to fetch states from the remote address
         
         for module in self.modules:
-            directory = module.replace("terragrunt.hcl", "")
+            module_directory = module.replace("terragrunt.hcl", "")
             try:
 
-                subprocess.run("terragrunt refresh --terragrunt-working-dir {}".format(directory, directory), shell=True, check=True)
-                subprocess.run("terragrunt plan --terragrunt-working-dir {} > /tmp/states/{}plan_output ".format(directory, directory), shell=True, check=True)
+                subprocess.run("terragrunt refresh --terragrunt-working-dir {}".format(module_directory, module_directory), shell=True, check=True)
+                subprocess.run("terragrunt plan --terragrunt-working-dir {} > /tmp/states/{}plan_output ".format(module_directory, module_directory), shell=True, check=True)
 
             except Exception as exp:
                 logging.warning(exp)
@@ -55,8 +55,8 @@ class Terragrunt(object):
         
 
         for module in self.modules:
-            directory = module.replace("terragrunt.hcl", "")
-            plan_output = "/tmp/states/{}plan_output".format(directory)
+            module_directory = module.replace("terragrunt.hcl", "")
+            plan_output = "/tmp/states/{}plan_output".format(module_directory)
             
             try:
                 contents = Path(plan_output).read_text()

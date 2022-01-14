@@ -41,6 +41,7 @@ haydarctl start to fetch github repositories and checks the each terragrunt modu
 
 ## Respect to ; 
 
+<i>Haydar Haydar - Neşet Ertaş</i>
 
-<b>Haydar Haydar</b>
-<a href="https://www.youtube.com/watch?v=YnKI_7WY3nE">Neşet Ertaş</a>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YnKI_7WY3nE/0.jpg)](https://www.youtube.com/watch?v=YnKI_7WY3nE)
+

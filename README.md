@@ -33,7 +33,7 @@ and you need to export your git account token as environment variable ;
 Finally you can run the main.py like that ; 
 
 ```sh
-    python3 main.py --config <YOUR_CONFIG_FILE> --output <OUTPUT_DIRECTORY>
+    python3 main.py --config <YOUR_CONFIG_FILE> --output <OUTPUT_DIRECTORY> --workspace<DIR_TO_PULL_REPOS_CREATE_PLAN_FILES>
 ```
 
 haydarctl start to fetch github repositories and checks the each terragrunt modules and compares the states built-in terragrunt commands and generates drift templates.To see the examples you can check the <b>issues</b> directory.

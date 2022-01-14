@@ -23,9 +23,16 @@ parser.add_argument("--output",
                        help="the locationg of the generated template files",
                        default="./issues")
 
+
+parser.add_argument("--workspace",
+                       action='store',
+                       type=str,
+                       help="The place to clone and store the repositories, plan files and states",
+                       default="./haydar-workspace")
+
 args = parser.parse_args()
 
-def main(config_file, template_directory):
+def main(config_file, template_directory, workspace):
 
     with open(config_file, "r") as stream:
         try:
@@ -39,17 +46,17 @@ def main(config_file, template_directory):
     gh_obj = GithubUtils()
 
     for repo in repo_list:
-        gh_obj.clone_repo("{}/{}".format(organization, repo), "/tmp/{}".format(repo))
+        gh_obj.clone_repo("{}/{}".format(organization, repo), "{}/{}".format(workspace, repo))
 
 
     for repo in repo_list:
 
-        obj = Terragrunt(terragrunt_root_addr="/tmp/{}".format(repo))
+        obj = Terragrunt(terragrunt_root_addr="{}/{}".format(workspace, repo))
 
         issue_obj = TerragruntIssueGenerator()
-        obj.fetch_list_of_state_files()
-        obj.state_checker()
-        plan_resources = obj.aggregator()
+        obj.fetch_list_of_state_files(workspace=workspace)
+        obj.state_checker(workspace=workspace)
+        plan_resources = obj.aggregator(workspace=workspace)
 
         modules = obj.modules
         print(modules)
@@ -66,13 +73,14 @@ def main(config_file, template_directory):
 if __name__ == "__main__":
     config_file = args.config
     directory = args.output
+    workspace = args.workspace
 
     check_config_file = Path(config_file).exists()
     check_directory = Path(directory).is_dir()
 
     if check_directory == True and check_config_file == True:
         logging.warning("The repo check just started on  the repositories are according to the {} file .. ".format(config_file))
-        main(config_file=config_file, template_directory=directory)
+        main(config_file=config_file, template_directory=directory, workspace=workspace)
     else:
         logging.error("File status {}".format(check_config_file))
         logging.error("Directory status {}".format(check_directory))

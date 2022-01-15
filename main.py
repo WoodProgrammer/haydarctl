@@ -54,7 +54,6 @@ def main(config_file, template_directory, workspace):
         obj = Terragrunt(terragrunt_root_addr="{}/{}".format(workspace, repo))
 
         issue_obj = TerragruntIssueGenerator()
-        obj.fetch_list_of_state_files(workspace=workspace)
         obj.state_checker(workspace=workspace)
         plan_resources = obj.aggregator(workspace=workspace)
 

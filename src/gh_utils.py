@@ -7,7 +7,7 @@ class GithubUtils(object):
         gh_token = os.environ["GH_TOKEN"]
         self.repo_pull_url = "https://{}:x-oauth-basic@github.com/".format(gh_token)
 
-    def clone_repo(self, repo_addr, clone_to="/tmp/"):
+    def clone_repo(self, repo_addr, clone_to):
         repo_url = "{}/{}".format(self.repo_pull_url, repo_addr)
 
         try:

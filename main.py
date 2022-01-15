@@ -28,7 +28,7 @@ parser.add_argument("--workspace",
                        action='store',
                        type=str,
                        help="The place to clone and store the repositories, plan files and states",
-                       default="/tmp")
+                       default="./haydar-workspace")
 
 args = parser.parse_args()
 

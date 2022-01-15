@@ -51,9 +51,7 @@ class Terragrunt(object):
 
     def aggregator(self, workspace): ## aggregate plan output with issue templates
         plan_map = {}
-        
-        
-
+    
         for module in self.modules:
             module_directory = module.replace("terragrunt.hcl", "")
             plan_output = "{}/states/{}plan_output".format(workspace, module_directory)

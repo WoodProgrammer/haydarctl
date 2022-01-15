@@ -51,7 +51,7 @@ def main(config_file, template_directory, workspace):
 
     for repo in repo_list:
 
-        obj = Terragrunt(terragrunt_root_addr="{}/{}".format(workspace, repo))
+        obj = Terragrunt(tg_root_addr="{}/{}".format(workspace, repo))
 
         issue_obj = TerragruntIssueGenerator()
         obj.state_checker(workspace=workspace)

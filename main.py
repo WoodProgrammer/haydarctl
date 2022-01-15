@@ -11,26 +11,30 @@ from src.gh_utils import GithubUtils
 parser = argparse.ArgumentParser(description="Path of the configuration file")
 
 
-parser.add_argument("--config",
+parser.add_argument(
+                       "--config",
                        action='store',
                        type=str,
                        help="the path of the configuration file",
                        default="./config/haydar.yaml")
 
-parser.add_argument("--output",
+parser.add_argument(
+                       "--output",
                        action='store',
                        type=str,
                        help="the locationg of the generated template files",
                        default="./issues")
 
 
-parser.add_argument("--workspace",
+parser.add_argument(
+                       "--workspace",
                        action='store',
                        type=str,
                        help="The place to clone and store the repositories, plan files and states",
                        default="./haydar-workspace")
 
 args = parser.parse_args()
+
 
 def main(config_file, template_directory, workspace):
 
@@ -48,10 +52,8 @@ def main(config_file, template_directory, workspace):
     for repo in repo_list:
         gh_obj.clone_repo("{}/{}".format(organization, repo), "{}/{}".format(workspace, repo))
 
-
     for repo in repo_list:
-
-        obj = Terragrunt(terragrunt_root_addr="{}/{}".format(workspace, repo))
+        obj = Terragrunt(tg_root_addr="{}/{}".format(workspace, repo))
 
         issue_obj = TerragruntIssueGenerator()
         obj.state_checker(workspace=workspace)
@@ -69,7 +71,6 @@ def main(config_file, template_directory, workspace):
                 logging.error(exp)
                 continue
 
-
 if __name__ == "__main__":
     config_file = args.config
     directory = args.output
@@ -78,12 +79,11 @@ if __name__ == "__main__":
     check_config_file = Path(config_file).exists()
     check_directory = Path(directory).is_dir()
 
-    if check_directory == True and check_config_file == True:
+    if check_directory is True and check_config_file is True:
         logging.warning("The repo check just started on  the repositories are according to the {} file .. ".format(config_file))
         main(config_file=config_file, template_directory=directory, workspace=workspace)
     else:
         logging.error("File status {}".format(check_config_file))
         logging.error("Directory status {}".format(check_directory))
-
         logging.error("Please check the directory and file names directory:: {} file:: {} ".format(directory, config_file))
         sys.exit(1)

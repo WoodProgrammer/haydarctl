@@ -2,6 +2,7 @@ import os
 import logging
 from git import Repo
 
+
 class GithubUtils(object):
     def __init__(self):
         gh_token = os.environ["GH_TOKEN"]

@@ -1,7 +1,7 @@
 import glob
 import unittest
 from src.issue_generator import *
-from src.tests.utils import check_file
+from tests.utils import check_file
 
 class TestIssueTemplateGenerator(unittest.TestCase):
 

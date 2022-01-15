@@ -1,6 +1,7 @@
 import glob
 import unittest
 from src.issue_generator import *
+from src.tests.utils import check_file
 
 class TestIssueTemplateGenerator(unittest.TestCase):
 
@@ -32,11 +33,8 @@ class TestIssueTemplateGenerator(unittest.TestCase):
         obj = TerragruntIssueGenerator()
         content = obj.create_template_file(repo="infra_hede", plan_output=sample_plan_output, module_name="eu-west-1/s3")
         obj.save_template_content(repo="infra_hede", template_directory="./test-templates", content=content)
-        
-        if glob.glob("test-templates/infra_hede.md"):
-          file_status = True
-        else:
-          file_status = False
+      
+        file_status = check_file("test-templates/infra_hede.md")
 
         self.assertNotEqual(content, None)
         self.assertEqual(file_status, True)

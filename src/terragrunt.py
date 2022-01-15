@@ -30,12 +30,11 @@ class Terragrunt(object):
         
         for module in self.modules:
             module_directory = module.replace("terragrunt.hcl", "")
-            splitted_module = module.split("/")
-            module_name = splitted_module[splitted_module.index("terragrunt.hcl")-1]
+            plan_file_name = module.replace("/", "-")
             try:
                 
                 subprocess.run("terragrunt refresh -lock=false --terragrunt-working-dir {}".format(module_directory, module_directory), shell=True, check=True)
-                subprocess.run("terragrunt plan -lock=false --terragrunt-working-dir {} > {}/{}plan_output ".format(module_directory, workspace,module_name), shell=True, check=True)
+                subprocess.run("terragrunt plan -lock=false --terragrunt-working-dir {} > {}/{}plan_output ".format(module_directory, workspace,plan_file_name), shell=True, check=True)
 
             except Exception as exp:
                 logging.warning(exp)
@@ -45,9 +44,8 @@ class Terragrunt(object):
     
         for module in self.modules:
             module_directory = module.replace("terragrunt.hcl", "")
-            splitted_module = module.split("/")
-            module_name = splitted_module[splitted_module.index("terragrunt.hcl")-1]
-            plan_output = "{}/states/{}plan_output".format(workspace, module_name)
+            plan_file_name = module.replace("/", "-")
+            plan_output = "{}/plan/{}plan_output".format(workspace, plan_file_name)
             
             try:
                 contents = Path(plan_output).read_text()

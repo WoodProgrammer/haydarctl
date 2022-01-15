@@ -15,8 +15,8 @@ class TestTerragrunt(unittest.TestCase):
     def test_state_checker(self):
         workspace="haydar-workspace"
         
-        #tg_obj = Terragrunt(terragrunt_root_addr="src/tests/haydar-terragrunt")
-        #tg_obj.state_checker(workspace=workspace)
+        tg_obj = Terragrunt(terragrunt_root_addr="src/tests/haydar-terragrunt")
+        tg_obj.state_checker(workspace=workspace)
 
         file_status = check_file("haydar-workspace/s3plan_output")
         file_size   = check_file_size("haydar-workspace/s3plan_output")

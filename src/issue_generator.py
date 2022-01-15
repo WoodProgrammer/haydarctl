@@ -2,7 +2,7 @@ from jinja2 import Environment, FileSystemLoader
 
 class TerragruntIssueGenerator(object):
     def __init__(self):
-        env = Environment(loader=FileSystemLoader('templates'), autoescape=False)
+        env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
 
         self.template = env.get_template('terragrunt_gh_issue_templates/issue_template.jinja')
 

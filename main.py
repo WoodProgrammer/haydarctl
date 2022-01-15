@@ -54,7 +54,6 @@ def main(config_file, template_directory, workspace):
         obj = Terragrunt(terragrunt_root_addr="{}/{}".format(workspace, repo))
 
         issue_obj = TerragruntIssueGenerator()
-        obj.fetch_list_of_state_files(workspace=workspace)
         obj.state_checker(workspace=workspace)
         plan_resources = obj.aggregator(workspace=workspace)
 
@@ -64,7 +63,8 @@ def main(config_file, template_directory, workspace):
         for module in modules:
             try:
                 plan_output = plan_resources[module]
-                issue_obj.create_template_file(repo=repo, plan_output=plan_output, module_name=module, template_directory=template_directory)
+                content = issue_obj.create_template_file(repo=repo, plan_output=plan_output, module_name=module)
+                issue_obj.save_template_content(template_directory=template_directory, content=content)
             except Exception as exp:
                 logging.error(exp)
                 continue

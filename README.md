@@ -1,5 +1,9 @@
 ## haydarctl [DEMO]
 
+<img src="./img/logo.png"></img>
+
+The config drift checker with terragrunt states to detect manual changes on your infra out of the as-code stack.
+
 # Why haydarctl ? 
 
 In IAC universe we can seperate drift problem in two main part.<a href="https://github.com/snyk/driftctl/">Resource</a> and Configuration drifts.

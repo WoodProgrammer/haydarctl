@@ -1,9 +1,10 @@
 ## haydarctl [DEMO]
 
-
 # Why haydarctl ? 
 
-In IAC universe we can seperate drift problem in two main part.<a href="https://github.com/snyk/driftctl/">Resource</a> and Configuration drifts.According to the daily support cases or less privileged user access or bypassed manual changes from the terraform code blocks that can cause configurational drifts.
+In IAC universe we can seperate drift problem in two main part.<a href="https://github.com/snyk/driftctl/">Resource</a> and Configuration drifts.
+
+According to the daily support cases or less privileged user access or bypassed manual changes from the terraform code blocks that can cause configurational drifts.
 
 Let's check this example ; 
 
@@ -13,27 +14,21 @@ In this example diagram at day-0 teams create their own resource on AWS.After th
 
 To check your state and code block compability in specified time periods you can use the haydarctl.
 
-## How it works ? 
-At the first you have to define your organization name and list of the repositories;
+## How it works ?
 
-Example config/haydar.yaml file ;
+Haydarctl needs two important thing;
 
-```yaml
-organization: WoodProgrammer
-repo_list:
-  - infra_hede
-```
+* python3
+* terragrunt
 
-and you need to export your git account token as environment variable ; 
+After you installed them you can start to run it.
 
-```sh
-    export GH_TOKEN=<YOU-SUPER-SECRET-GITHUB-TOKEN>
-```
+Haydarctl get the directory address from command line and you can run this any directory address you want.
 
-Finally you can run the main.py like that ; 
+Example usage ;
 
 ```sh
-    python3 main.py --config <YOUR_CONFIG_FILE> --output <OUTPUT_DIRECTORY> --workspace<DIR_TO_PULL_REPOS_CREATE_PLAN_FILES>
+  $ python3 main.py  --output drift_output_address --workspace infra_address
 ```
 
 haydarctl start to fetch github repositories and checks the each terragrunt modules and compares the states built-in terragrunt commands and generates drift templates.To see the examples you can check the <b>issues</b> directory.
@@ -45,3 +40,6 @@ haydarctl start to fetch github repositories and checks the each terragrunt modu
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YnKI_7WY3nE/0.jpg)](https://www.youtube.com/watch?v=YnKI_7WY3nE)
 
+
+# TODO 
+* pip packages

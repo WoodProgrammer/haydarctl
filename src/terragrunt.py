@@ -41,10 +41,11 @@ class Terragrunt(object):
 
     def aggregator(self, workspace):  # aggregate plan output with issue templates
         plan_map = {}
+
         for module in self.modules:
             module_directory = module.replace("terragrunt.hcl", "")
             plan_file_name = module.replace("/", "-")
-            plan_output = "{}/plan/{}plan_output".format(workspace, plan_file_name)
+            plan_output = "{}/{}plan_output".format(workspace, plan_file_name)
             try:
                 contents = Path(plan_output).read_text()
                 plan_map[module] = contents

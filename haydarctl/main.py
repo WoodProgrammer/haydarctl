@@ -49,7 +49,18 @@ def main():
     workspace_directory = directory_handler(workspace)
 
 
+    print("""
+    __  __                        __                          __     __       
+   / / / /  ____ _   __  __  ____/ /  ____ _   _____  _____  / /_   / /       
+  / /_/ /  / __ `/  / / / / / __  /  / __ `/  / ___/ / ___/ / __/  / /        
+ / __  /  / /_/ /  / /_/ / / /_/ /  / /_/ /  / /    / /__  / /_   / /         
+/_/ /_/   \__,_/   \__, /  \__,_/   \__,_/  /_/     \___/  \__/  /_/          
+                  /____/                                              
+    
+    This tools compares Terraform state and Real Resources and it generates a output file for you
+    Caveats: This tool is not stable yet and your feedbacks are very important for us please do not hesiate to create Issue&Pr on Github.
 
+    """)
     print("Parameters {} {}".format(directory, workspace_directory))
 
     check_directory = Path(directory).is_dir()

@@ -16,10 +16,6 @@ In IAC universe we can seperate drift problem in two main part.<a href="https://
 
 According to the daily support cases or less privileged user access or bypassed manual changes from the terraform code blocks that can cause configurational drifts.
 
-Let's check this example ; 
-
-<img src="./docs/img/config-drift.png"></img>
-
 In this example diagram at day-0 teams create their own resource on AWS.After that some of the manual changes and non-imported resources can make your code blocks too far away from the desired state of the terraform.
 
 To check your state and code block compability in specified time periods you can use the haydarctl.

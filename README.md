@@ -70,7 +70,3 @@ haydarctl start to fetch github repositories and checks the each terragrunt modu
 <i>Haydar Haydar - Neşet Ertaş</i>
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YnKI_7WY3nE/0.jpg)](https://www.youtube.com/watch?v=YnKI_7WY3nE)
-
-
-# TODO 
-* pip packages

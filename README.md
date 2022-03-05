@@ -1,6 +1,6 @@
 ## haydarctl [DEMO]
 
-<img src="./img/logo.png"></img>
+<img src="./img/logo.png" width="300" height="300"></img>
 
 The config drift checker with terragrunt states to detect manual changes on your infra out of the as-code stack.
 

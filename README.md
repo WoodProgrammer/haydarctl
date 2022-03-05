@@ -1,4 +1,6 @@
+<p align="center">
 ## haydarctl [DEMO]
+</p>
 
 <p align="center">
   <img width="300" height="300" src="./img/logo.png"></img>

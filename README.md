@@ -35,11 +35,22 @@ After you installed them you can start to run it.
 
 Haydarctl get the directory address from command line and you can run this any directory address you want.
 
-Example usage ;
+## Installation
 
 ```sh
-  $ python3 main.py  --output drift_output_address --workspace infra_address
+
+  git clone git@github.com:WoodProgrammer/haydarctl.git
+  pip3 install --upgrade ./haydarctl
+
 ```
+To verify the installation run this command
+
+```sh
+    haydarctl --help
+```
+## Usage
+
+You can check this video
 
 haydarctl start to fetch github repositories and checks the each terragrunt modules and compares the states built-in terragrunt commands and generates drift templates.To see the examples you can check the <b>issues</b> directory.
 

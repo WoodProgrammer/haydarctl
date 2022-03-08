@@ -25,7 +25,7 @@ class TerragruntIssueGenerator(object):
         output_from_parsed_template = self.template.render(plan_output="{}".format(plan_output), module_name=module_name)
         return output_from_parsed_template
 
-    def save_template_content(self, workspace, template_directory, content):
+    def save_template_content(self, template_directory, content, resource_name, resource_prefix):
 
-        with open("{}/{}.md".format(template_directory, workspace), "w") as fh:
+        with open("{}/{}.{}.md".format(template_directory, resource_prefix,resource_name), "w") as fh:
             fh.write(content)

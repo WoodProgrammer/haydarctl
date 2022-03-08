@@ -85,14 +85,13 @@ def main():
     for module in modules:
         try:
             plan_output = plan_resources[module]
+            resource_name = module.split("/")[-2:][0]
+            resource_prefix = module.split("/")[-3:][0]
             content = issue_obj.create_template_file(plan_output=plan_output, module_name=module)
-            issue_obj.save_template_content(workspace=workspace, template_directory=template_directory, content=content)
+            issue_obj.save_template_content(template_directory=template_directory, content=content, resource_name=resource_name, resource_prefix=resource_prefix)
         except Exception as exp:
             logging.error(exp)
             continue
     
 
     print("The output files is extracted in here Happy Terragrunting .. ")
-
-
-directory_handler("fix")

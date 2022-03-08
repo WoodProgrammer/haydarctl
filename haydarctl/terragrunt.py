@@ -33,8 +33,8 @@ class Terragrunt(object):
             module_directory = module.replace("terragrunt.hcl", "")
             plan_file_name = module.replace("/", "-")
             try:
-                subprocess.run("terragrunt refresh -lock=false --terragrunt-working-dir {}".format(module_directory, module_directory), shell=True, check=True)
-                subprocess.run("terragrunt plan -lock=false --terragrunt-working-dir {} > {}/{}plan_output ".format(module_directory, workspace, plan_file_name), shell=True, check=True)
+                subprocess.run("terragrunt refresh -no-color --terragrunt-working-dir {}".format(module_directory, module_directory), shell=True, check=True)
+                subprocess.run("terragrunt plan -no-color --terragrunt-working-dir {} > {}/{}plan_output ".format(module_directory, workspace, plan_file_name), shell=True, check=True)
 
             except Exception as exp:
                 logging.warning(exp)

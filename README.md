@@ -58,6 +58,9 @@ To verify the installation run this command
  
     
 ```
+
+## Documentation
+<a href="https://emirozbirdeveloper.medium.com/configuration-drifts-and-ha-dd55132b2132">Configuration Drifts and Haydarctl</a>
 ## Usage
 
 You can check this video
